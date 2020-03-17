@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MVCAttendanceSystem.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MVCAttendanceSystem.Controllers
 {
@@ -134,6 +135,15 @@ namespace MVCAttendanceSystem.Controllers
             }
         }
 
+        [AllowAnonymous]
+        public async Task<ActionResult> CreateRole()
+        {
+            RoleManager<IdentityRole> rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            IdentityRole ir = new IdentityRole("Student");
+            await rm.CreateAsync(ir);
+            return Content("Student Created");
+        }
+
         //
         // GET: /Account/Register
         [AllowAnonymous]
@@ -155,8 +165,10 @@ namespace MVCAttendanceSystem.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                      await UserManager.AddToRoleAsync(user.Id, "Student");
+
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
