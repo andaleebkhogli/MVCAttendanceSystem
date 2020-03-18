@@ -1,11 +1,36 @@
-﻿
+﻿@model MVCAttendanceSystem.Models.ApplicationUser
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
-<h3>@ViewBag.Id</h3>
+<h3>Student Profile</h3>
 
-<a href="/student/TakePermission" class="btn">Take permission</a>
+<form class="form-horizontal" role="form">
 
+    <div class="form-group">
+        <div>
+            <label class="col-lg-3 control-label">Student Name:</label>
+        </div>
+        
+        <div class="col-lg-8">
+            <label>@ViewBag.Name</label>
+        </div>
+    </div>
+    <hr />
+    <div class="form-group">
+        <div>
+            <label class="col-lg-3 control-label">Department:</label>
+        </div>
+        
+        <div class="col-lg-8">
+            <label>@Model.department.DepartmentName</label>
+        </div>
+    </div>
+    <hr/>
+    <a href="/Student/ViewMyAttendance" class="btn">View my attendance</a>
+    <br />
+    <a href="/Student/TakePermission" class="btn">Take permission</a>
+
+</form>

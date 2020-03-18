@@ -44,7 +44,5 @@ namespace MVCAttendanceSystem.Models
         //public System.Data.Entity.DbSet<MVCAttendanceSystem.Models.ApplicationUser> ApplicationUsers { get; set; }
 
         //public System.Data.Entity.DbSet<MVCAttendanceSystem.Models.ApplicationUser> ApplicationUsers { get; set; }
-
-        //public System.Data.Entity.DbSet<MVCAttendanceSystem.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }
