@@ -119,6 +119,27 @@ namespace MVCAttendanceSystem.Controllers
             userManager.Delete(DeletedUser);
             return RedirectToAction("Index");
         }
-        
+
+        //Admin should select a department and date to show all students attend at that date
+        //then return to GetAttendanceBySpecificDate Action
+        public ActionResult AttendanceBySpecificDate()
+        {
+            var DepartmentId = Context.departments.ToList();
+            ViewBag.DepartmentId = new SelectList(DepartmentId, "DepartmentId", "DepartmentName");
+            return View();
+        }
+        //take a parameters from the above view and adapt the query and return to the same view
+        //to list the students
+        [HttpPost]
+        public ActionResult GetAttendanceBySpecificDate(int DepartmentId, DateTime Date)
+        {
+            var dept = Context.departments.Find(DepartmentId);
+            var studentAttendance = Context.attendances
+                .Include("ApplicationUser")
+                .Where(c => c.Date.Day == Date.Day && c.Date.Month == Date.Month && c.Date.Year == Date.Year && c.applicationUser.DepartmentId == dept.DepartmentId);
+
+            return View(studentAttendance.ToList());
+        }
+
     }
 }
