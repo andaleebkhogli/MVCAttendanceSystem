@@ -119,5 +119,6 @@ namespace MVCAttendanceSystem.Controllers
             userManager.Delete(DeletedUser);
             return RedirectToAction("Index");
         }
+        
     }
 }
