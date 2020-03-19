@@ -13,7 +13,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MVCAttendanceSystem.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -135,13 +135,28 @@ namespace MVCAttendanceSystem.Controllers
             }
         }
 
-        [AllowAnonymous]
-        public async Task<ActionResult> CreateRole()
+        public async Task<ActionResult> CreateAdminRole()
+        {
+            RoleManager<IdentityRole> rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            IdentityRole ir = new IdentityRole("Admin");
+            await rm.CreateAsync(ir);
+            return Content("Admin Created");
+        }
+
+        public async Task<ActionResult> CreateStudentRole()
         {
             RoleManager<IdentityRole> rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
             IdentityRole ir = new IdentityRole("Student");
             await rm.CreateAsync(ir);
             return Content("Student Created");
+        }
+
+        public async Task<ActionResult> CreateSecurityRole()
+        {
+            RoleManager<IdentityRole> rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            IdentityRole ir = new IdentityRole("Security");
+            await rm.CreateAsync(ir);
+            return Content("Security Created");
         }
 
         //
@@ -165,10 +180,10 @@ namespace MVCAttendanceSystem.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                      await UserManager.AddToRoleAsync(user.Id, "Student");
+                      await UserManager.AddToRoleAsync(user.Id, "Admin");
 
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
+                    
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
