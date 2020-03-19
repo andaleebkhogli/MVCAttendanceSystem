@@ -84,12 +84,9 @@ namespace MVCAttendanceSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ApplicationUser user)
         {
-            //var DepartmentId = Context.departments.ToList();
-            //ViewBag.DepartmentId = new SelectList(DepartmentId, "DepartmentId", "DepartmentName");
             ApplicationUser EditedUser = userManager.FindById(user.Id);
             EditedUser.UserName = user.UserName;
             EditedUser.Email = user.Email;
-            //EditedUser.department = user.department;
             EditedUser.PhoneNumber = user.PhoneNumber;
             userManager.Update(EditedUser);
             return RedirectToAction("Index");
@@ -118,6 +115,37 @@ namespace MVCAttendanceSystem.Controllers
             ApplicationUser DeletedUser = userManager.Users.FirstOrDefault(s => s.Id == id);
             userManager.Delete(DeletedUser);
             return RedirectToAction("Index");
+        }
+        
+        public ActionResult PreviewPermission()
+        {
+            var permissions = Context.permissions.Include(a => a.applicationUser).ToList();
+            return View(permissions);
+        }
+        [HttpPost]
+        public ActionResult PreviewPermission(List<Permission> permissions)
+        {
+            foreach(var item in permissions)
+            {
+                var StudentPermission = Context.permissions.Find(item.PermissionId);
+                
+                if (item.IsChecked)
+                {
+                    item.Status = "Accept";
+                }
+                else
+                {
+                    item.Status = "Refused";
+                }
+
+                 StudentPermission.Status = item.Status;
+                 StudentPermission.IsChecked = item.IsChecked;
+
+            }
+
+            Context.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
