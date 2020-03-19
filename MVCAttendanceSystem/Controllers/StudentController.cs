@@ -24,8 +24,13 @@ namespace MVCAttendanceSystem.Controllers
         // GET: Student
         public ActionResult Index()
         {
-            ViewBag.Id = User.Identity.GetUserId();
-            return View();
+            var stid = User.Identity.GetUserId();
+            ViewBag.Name = User.Identity.Name;
+            var student = userManager.FindById(stid);
+            var studentbyID = userManager.Users.Include(a => a.department).FirstOrDefault(s => s.Id == student.Id);
+            var permissionStatus = Context.permissions.FirstOrDefault(p => p.ApplicationUserId == stid).Status;
+            ViewBag.Status = permissionStatus;
+            return View(studentbyID);
         }
         
 
@@ -49,6 +54,14 @@ namespace MVCAttendanceSystem.Controllers
             }
 
             return View("TakePermission");
+        }
+        
+        
+        public ActionResult ViewMyAttendance()
+        {
+            var currentUser = User.Identity.GetUserId();
+            var attendance = Context.attendances.Where(q => q.ApplicationUserId == currentUser).ToList();
+            return View(attendance);
         }
     }
 }
