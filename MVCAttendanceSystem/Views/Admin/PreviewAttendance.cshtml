@@ -1,0 +1,50 @@
+﻿@model MVCAttendanceSystem.ViewModel.AdminPreviewAttendance
+
+@{
+    ViewBag.Title = "Attendance";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("GetStudents", "Admin", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
+{
+    
+    @*@Html.AntiForgeryToken()*@
+    <h4>Show attendance information of all students in specific department during specific period of time</h4>
+    <hr />
+    @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
+    // DropDownList of departments
+    <div class="form-group">
+        @Html.Label("Department", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("DepartmentId", null, new { @class = "form-control" })
+        </div>
+    </div>
+    // From: date input
+    <div class="form-group">
+        @Html.LabelFor(t => t.From, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(t => t.From, new { @class = "form-control" })
+        </div>
+    </div>
+    // To: date input
+    <div class="form-group">
+        @Html.LabelFor(t => t.To, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(t => t.To, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Preview" />
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+}
