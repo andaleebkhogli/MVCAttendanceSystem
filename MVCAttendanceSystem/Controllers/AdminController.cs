@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MVCAttendanceSystem.Models;
+using MVCAttendanceSystem.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -167,5 +168,61 @@ namespace MVCAttendanceSystem.Controllers
                 
             return View(studentAttendance.ToList());
         }
+
+        public ActionResult PreviewAttendance()
+        {
+            var DepartmentId = Context.departments.ToList();
+            ViewBag.DepartmentId = new SelectList(DepartmentId, "DepartmentId", "DepartmentName");
+            return View();
+        }
+        public ActionResult GetStudents(int DepartmentId, DateTime From, DateTime To)
+        {
+            var query1 = Context.attendances
+                .Include("ApplicationUser")
+                .Where(a => a.applicationUser.DepartmentId == DepartmentId && a.Date >= From && a.Date <= To)
+                .ToList();
+            var stds = Context.Users.Where(a => a.DepartmentId == DepartmentId).ToList();
+            var List = new List<SharedModel>();
+            var std = new SharedModel();
+            foreach (var student in stds)
+            {
+                int OnTime = 0, Late = 0, Permission = 0, Apscent = 0;
+
+                foreach (var att in query1)
+                {
+                    if (student.Id == att.ApplicationUserId)
+                    {
+                        if (att.Status == "OnTime")
+                        {
+                            OnTime++;
+                        }
+                        else if (att.Status == "Late")
+                        {
+                            Late++;
+                        }
+                        else if (att.Status == "Permission")
+                        {
+                            Permission++;
+                        }
+                        else if (att.Status == "Apscent")
+                        {
+                            Apscent++;
+                        }
+                    }
+                    std = new SharedModel
+                    {
+                        userName = student.UserName,
+                        OnTime = OnTime,
+                        Late = Late,
+                        Permission = Permission,
+                        Apscent = Apscent
+                    };
+                }
+                List.Add(std);
+            }
+
+            return View(List);
+        }
+
     }
 }
