@@ -1,0 +1,43 @@
+﻿
+@model List<MVCAttendanceSystem.Models.Attendance>
+
+@{
+    ViewBag.Title = "departureStudents";
+}
+
+<h2>departureStudents</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Student Name")
+        </th>
+        <th>
+            @Html.DisplayName("Department")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.applicationUser.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.applicationUser.department.DepartmentName)
+            </td>
+            <td>
+                @Html.ActionLink("Exit", "StudnetExit", new { id = item.ApplicationUserId})
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+
+@Html.ActionLink("Another Department", "departure")
+
+
+
+

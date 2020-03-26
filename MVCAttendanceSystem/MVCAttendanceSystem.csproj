@@ -211,6 +211,14 @@
     <Compile Include="Migrations\202003162033495_AddAnotation.Designer.cs">
       <DependentUpon>202003162033495_AddAnotation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003221719227_SetDepartmentIdInUsersTableNotNull.cs" />
+    <Compile Include="Migrations\202003221719227_SetDepartmentIdInUsersTableNotNull.Designer.cs">
+      <DependentUpon>202003221719227_SetDepartmentIdInUsersTableNotNull.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003221729489_returnDepartmentIdToAcceptNull.cs" />
+    <Compile Include="Migrations\202003221729489_returnDepartmentIdToAcceptNull.Designer.cs">
+      <DependentUpon>202003221729489_returnDepartmentIdToAcceptNull.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Attendance.cs" />
@@ -237,6 +245,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -292,10 +302,13 @@
     <Content Include="Views\Student\TakePermission.cshtml" />
     <Content Include="Views\Admin\AttendanceBySpecificDate.cshtml" />
     <Content Include="Views\Admin\GetAttendanceBySpecificDate.cshtml" />
+    <Content Include="Views\Security\setting.cshtml" />
+    <Content Include="Views\Security\TakeAttendance.cshtml" />
+    <Content Include="Views\Security\departure.cshtml" />
+    <Content Include="Views\Security\departureStudents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Security\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -321,6 +334,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003162033495_AddAnotation.resx">
       <DependentUpon>202003162033495_AddAnotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003221719227_SetDepartmentIdInUsersTableNotNull.resx">
+      <DependentUpon>202003221719227_SetDepartmentIdInUsersTableNotNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003221729489_returnDepartmentIdToAcceptNull.resx">
+      <DependentUpon>202003221729489_returnDepartmentIdToAcceptNull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

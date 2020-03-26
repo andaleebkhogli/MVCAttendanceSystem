@@ -35,7 +35,8 @@
                     }
                     @if (User.IsInRole("Security"))
                     {
-                        <li>@Html.ActionLink("Attendance", "Index", "Security")</li>
+                        <li>@Html.ActionLink("Attendance", "Setting", "Security")</li>
+                        <li>@Html.ActionLink("departure", "departure", "Security")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
