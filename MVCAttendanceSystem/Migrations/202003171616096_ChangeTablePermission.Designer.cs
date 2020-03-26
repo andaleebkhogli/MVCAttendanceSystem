@@ -7,13 +7,13 @@ namespace MVCAttendanceSystem.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddAnotation : IMigrationMetadata
+    public sealed partial class ChangeTablePermission : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddAnotation));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangeTablePermission));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003162033495_AddAnotation"; }
+            get { return "202003171616096_ChangeTablePermission"; }
         }
         
         string IMigrationMetadata.Source

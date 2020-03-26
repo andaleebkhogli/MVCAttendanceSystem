@@ -17,5 +17,6 @@ namespace MVCAttendanceSystem.Models
         [Display(Name = "Permission Date")]
         public DateTime PermissionDate { get; set; }
         public ApplicationUser applicationUser { get; set; }
+        public bool IsChecked { get; set; }
     }
 }

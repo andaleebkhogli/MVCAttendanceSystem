@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MVCAttendanceSystem.Models;
+using MVCAttendanceSystem.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -84,12 +85,9 @@ namespace MVCAttendanceSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ApplicationUser user)
         {
-            //var DepartmentId = Context.departments.ToList();
-            //ViewBag.DepartmentId = new SelectList(DepartmentId, "DepartmentId", "DepartmentName");
             ApplicationUser EditedUser = userManager.FindById(user.Id);
             EditedUser.UserName = user.UserName;
             EditedUser.Email = user.Email;
-            //EditedUser.department = user.department;
             EditedUser.PhoneNumber = user.PhoneNumber;
             userManager.Update(EditedUser);
             return RedirectToAction("Index");
@@ -119,6 +117,37 @@ namespace MVCAttendanceSystem.Controllers
             userManager.Delete(DeletedUser);
             return RedirectToAction("Index");
         }
+        
+        public ActionResult PreviewPermission()
+        {
+            var permissions = Context.permissions.Include(a => a.applicationUser).ToList();
+            return View(permissions);
+        }
+        [HttpPost]
+        public ActionResult PreviewPermission(List<Permission> permissions)
+        {
+            foreach(var item in permissions)
+            {
+                var StudentPermission = Context.permissions.Find(item.PermissionId);
+                
+                if (item.IsChecked)
+                {
+                    item.Status = "Accept";
+                }
+                else
+                {
+                    item.Status = "Refused";
+                }
+
+                 StudentPermission.Status = item.Status;
+                 StudentPermission.IsChecked = item.IsChecked;
+
+            }
+
+            Context.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+        }
         //Admin should select a department and date to show all students attend at that date
         //then return to GetAttendanceBySpecificDate Action
         public ActionResult AttendanceBySpecificDate()
@@ -139,5 +168,61 @@ namespace MVCAttendanceSystem.Controllers
                 
             return View(studentAttendance.ToList());
         }
+
+        public ActionResult PreviewAttendance()
+        {
+            var DepartmentId = Context.departments.ToList();
+            ViewBag.DepartmentId = new SelectList(DepartmentId, "DepartmentId", "DepartmentName");
+            return View();
+        }
+        public ActionResult GetStudents(int DepartmentId, DateTime From, DateTime To)
+        {
+            var query1 = Context.attendances
+                .Include("ApplicationUser")
+                .Where(a => a.applicationUser.DepartmentId == DepartmentId && a.Date >= From && a.Date <= To)
+                .ToList();
+            var stds = Context.Users.Where(a => a.DepartmentId == DepartmentId).ToList();
+            var List = new List<SharedModel>();
+            var std = new SharedModel();
+            foreach (var student in stds)
+            {
+                int OnTime = 0, Late = 0, Permission = 0, Apscent = 0;
+
+                foreach (var att in query1)
+                {
+                    if (student.Id == att.ApplicationUserId)
+                    {
+                        if (att.Status == "OnTime")
+                        {
+                            OnTime++;
+                        }
+                        else if (att.Status == "Late")
+                        {
+                            Late++;
+                        }
+                        else if (att.Status == "Permission")
+                        {
+                            Permission++;
+                        }
+                        else if (att.Status == "Apscent")
+                        {
+                            Apscent++;
+                        }
+                    }
+                    std = new SharedModel
+                    {
+                        userName = student.UserName,
+                        OnTime = OnTime,
+                        Late = Late,
+                        Permission = Permission,
+                        Apscent = Apscent
+                    };
+                }
+                List.Add(std);
+            }
+
+            return View(List);
+        }
+
     }
 }

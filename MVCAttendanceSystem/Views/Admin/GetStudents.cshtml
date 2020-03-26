@@ -1,0 +1,32 @@
+﻿@model List<MVCAttendanceSystem.ViewModel.SharedModel>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>OnTime</th>
+                        <th>Late</th>
+                        <th>Permission</th>
+                        <th>Apscent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var student in Model)
+                    {
+                    <tr>
+                        <td>@student.userName</td>
+                        <td>@student.OnTime</td>
+                        <td>@student.Late</td>
+                        <td>@student.Permission</td>
+                        <td>@student.Apscent</td>
+
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
