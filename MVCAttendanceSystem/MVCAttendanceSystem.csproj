@@ -217,6 +217,14 @@
     <Compile Include="Migrations\202003171649086_ChangeTablePermission1.Designer.cs">
       <DependentUpon>202003171649086_ChangeTablePermission1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003262355416_PopulateRolesAndUsersTable.cs" />
+    <Compile Include="Migrations\202003262355416_PopulateRolesAndUsersTable.Designer.cs">
+      <DependentUpon>202003262355416_PopulateRolesAndUsersTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003270014138_PopulateUserRolesTable.cs" />
+    <Compile Include="Migrations\202003270014138_PopulateUserRolesTable.Designer.cs">
+      <DependentUpon>202003270014138_PopulateUserRolesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Attendance.cs" />
@@ -421,6 +429,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003221729489_returnDepartmentIdToAcceptNull.resx">
       <DependentUpon>202003221729489_returnDepartmentIdToAcceptNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003262355416_PopulateRolesAndUsersTable.resx">
+      <DependentUpon>202003262355416_PopulateRolesAndUsersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003270014138_PopulateUserRolesTable.resx">
+      <DependentUpon>202003270014138_PopulateUserRolesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
