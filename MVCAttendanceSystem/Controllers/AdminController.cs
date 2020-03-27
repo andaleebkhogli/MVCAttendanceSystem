@@ -132,7 +132,7 @@ namespace MVCAttendanceSystem.Controllers
                 
                 if (item.IsChecked)
                 {
-                    item.Status = "Accept";
+                    item.Status = "Accepted";
                 }
                 else
                 {

@@ -13,7 +13,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MVCAttendanceSystem.Controllers
 {
-    [Authorize(Roles ="Admin")]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

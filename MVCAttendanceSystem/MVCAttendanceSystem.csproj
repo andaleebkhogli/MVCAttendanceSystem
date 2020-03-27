@@ -249,6 +249,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\attendance-management-system-960x513.jpg" />
+    <Content Include="Images\banner-bg.jpg" />
+    <Content Include="Images\Bg1.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -404,6 +407,11 @@
     <Content Include="Views\Admin\GetAttendanceBySpecificDate.cshtml" />
     <Content Include="Views\Admin\PreviewPermission.cshtml" />
     <Content Include="Views\Admin\AttendanceBySpecificDate.cshtml" />
+    <Content Include="Views\Student\ViewMyAttendance.cshtml" />
+    <Content Include="Views\Security\departure.cshtml" />
+    <Content Include="Views\Security\departureStudents.cshtml" />
+    <Content Include="Views\Security\setting.cshtml" />
+    <Content Include="Views\Security\TakeAttendance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
