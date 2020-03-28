@@ -48,7 +48,7 @@ namespace MVCAttendanceSystem.Controllers
             int DepartmentId = (int)std.DepartmentId;
             var currentTime = DateTime.Now;
             string studentStatus = "";
-            if (currentTime.Hour<=9 && currentTime.Minute <= 15)
+            if (currentTime.Hour>=8 && currentTime.Hour<=9 && currentTime.Minute <= 15)
             {
                 studentStatus = "OnTime";
             }
@@ -100,6 +100,26 @@ namespace MVCAttendanceSystem.Controllers
             Context.SaveChanges();
             TempData["DeptId"] = DepartmentId;
             return RedirectToAction("departureStudents", "security", new { id = DepartmentId });
+        }
+        public ActionResult Absent(string Id)
+        {
+            var std = Context.Users.Find(Id);
+            int DepartmentId = (int)std.DepartmentId;
+            var currentTime = DateTime.Now;
+            string studentStatus = "Absent";
+            Attendance newAttend = new Attendance
+            {
+                ApplicationUserId = Id,
+                Date = DateTime.Now.Date,
+                ArrivalTime = DateTime.Now,
+                ExitTime = DateTime.Now.AddMinutes(2),
+                applicationUser = std,
+                Status = studentStatus
+            };
+            Context.attendances.Add(newAttend);
+            Context.SaveChanges();
+            TempData["DepartmentId"] = DepartmentId;
+            return RedirectToAction("TakeAttendance", "security", new { id = DepartmentId });
         }
     }
 }

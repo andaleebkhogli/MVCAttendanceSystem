@@ -217,6 +217,14 @@
     <Compile Include="Migrations\202003171649086_ChangeTablePermission1.Designer.cs">
       <DependentUpon>202003171649086_ChangeTablePermission1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003262355416_PopulateRolesAndUsersTable.cs" />
+    <Compile Include="Migrations\202003262355416_PopulateRolesAndUsersTable.Designer.cs">
+      <DependentUpon>202003262355416_PopulateRolesAndUsersTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003270014138_PopulateUserRolesTable.cs" />
+    <Compile Include="Migrations\202003270014138_PopulateUserRolesTable.Designer.cs">
+      <DependentUpon>202003270014138_PopulateUserRolesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Attendance.cs" />
@@ -241,6 +249,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\attendance-management-system-960x513.jpg" />
+    <Content Include="Images\banner-bg.jpg" />
+    <Content Include="Images\Bg1.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -396,6 +407,11 @@
     <Content Include="Views\Admin\GetAttendanceBySpecificDate.cshtml" />
     <Content Include="Views\Admin\PreviewPermission.cshtml" />
     <Content Include="Views\Admin\AttendanceBySpecificDate.cshtml" />
+    <Content Include="Views\Student\ViewMyAttendance.cshtml" />
+    <Content Include="Views\Security\departure.cshtml" />
+    <Content Include="Views\Security\departureStudents.cshtml" />
+    <Content Include="Views\Security\setting.cshtml" />
+    <Content Include="Views\Security\TakeAttendance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -421,6 +437,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003221729489_returnDepartmentIdToAcceptNull.resx">
       <DependentUpon>202003221729489_returnDepartmentIdToAcceptNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003262355416_PopulateRolesAndUsersTable.resx">
+      <DependentUpon>202003262355416_PopulateRolesAndUsersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003270014138_PopulateUserRolesTable.resx">
+      <DependentUpon>202003270014138_PopulateUserRolesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

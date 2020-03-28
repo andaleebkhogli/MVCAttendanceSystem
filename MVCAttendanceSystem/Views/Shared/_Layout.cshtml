@@ -21,12 +21,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @if (User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Departments", "Index", "Departments")</li>
                         <li>@Html.ActionLink("Users", "Index", "Admin")</li>
                         <li>@Html.ActionLink("Permissions", "PreviewPermission", "Admin")</li>
+                        <li>@Html.ActionLink("Attendance of specific day","AttendanceBySpecificDate","Admin")</li>
+                        <li>@Html.ActionLink("Attendance of specific period", "PreviewAttendance", "Admin")</li>
                     }
 
                     @if (User.IsInRole("Student"))
@@ -47,7 +48,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Shahinda`s Team</p>
+            <p>&copy; @DateTime.Now.Year - MaaS Team </p>
         </footer>
     </div>
 

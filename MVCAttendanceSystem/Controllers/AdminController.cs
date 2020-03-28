@@ -126,26 +126,33 @@ namespace MVCAttendanceSystem.Controllers
         [HttpPost]
         public ActionResult PreviewPermission(List<Permission> permissions)
         {
-            foreach(var item in permissions)
+            foreach (var item in permissions)
             {
                 var StudentPermission = Context.permissions.Find(item.PermissionId);
-                
                 if (item.IsChecked)
                 {
-                    item.Status = "Accept";
+                    StudentPermission.Status = "Accepted";
+                    Attendance newAttend = new Attendance
+                    {
+                        ApplicationUserId = StudentPermission.ApplicationUserId,
+                        Date = StudentPermission.PermissionDate,
+                        ArrivalTime = DateTime.Now,
+                        ExitTime = DateTime.Now,
+                        applicationUser = StudentPermission.applicationUser,
+                        Status = "Permission"
+                    };
+                    Context.attendances.Add(newAttend);
+                }
+                else if (!item.IsChecked && StudentPermission.Status != "Accepted")
+                {
+                    StudentPermission.Status = "Refused";
                 }
                 else
                 {
-                    item.Status = "Refused";
+                    continue;
                 }
-
-                 StudentPermission.Status = item.Status;
-                 StudentPermission.IsChecked = item.IsChecked;
-
             }
-
             Context.SaveChanges();
-
             return RedirectToAction("Index", "Home");
         }
         //Admin should select a department and date to show all students attend at that date
@@ -204,7 +211,7 @@ namespace MVCAttendanceSystem.Controllers
                         {
                             Permission++;
                         }
-                        else if (att.Status == "Apscent")
+                        else if (att.Status == "Absent")
                         {
                             Apscent++;
                         }

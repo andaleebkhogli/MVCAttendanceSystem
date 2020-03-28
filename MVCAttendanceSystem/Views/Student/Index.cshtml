@@ -29,16 +29,19 @@
         </div>
     </div>
     <hr />
-    <div class="form-group">
-        <div>
-            <label class="col-lg-3 control-label">Permission Status:</label>
-        </div>
+    @if (ViewBag.Status != null)
+    {
+        <div class="form-group">
+            <div>
+                <label class="col-lg-3 control-label">Permission Status:</label>
+            </div>
 
-        <div class="col-lg-8">
-            <label>@ViewBag.Status</label>
+            <div class="col-lg-8">
+                <label>@ViewBag.Status</label>
+            </div>
         </div>
-    </div>
-    <hr />
+        <hr />
+    }
 
     <a href="/Student/ViewMyAttendance" class="btn">View my attendance</a>
     <br />

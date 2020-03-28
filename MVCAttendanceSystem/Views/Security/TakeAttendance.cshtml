@@ -26,7 +26,8 @@
             @Html.DisplayFor(modelItem => item.department.DepartmentName)
         </td>
         <td>
-            @Html.ActionLink("Attend", "Attend", new { id=item.Id})
+            @Html.ActionLink("Attend", "Attend", new { id=item.Id})  | 
+            @Html.ActionLink("Absent","Absent",new { id=item.Id})
         </td>
     </tr>
 }

@@ -13,7 +13,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MVCAttendanceSystem.Controllers
 {
-    [Authorize(Roles ="Admin")]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -134,7 +133,7 @@ namespace MVCAttendanceSystem.Controllers
                     return View(model);
             }
         }
-
+        [AllowAnonymous]
         public async Task<ActionResult> CreateAdminRole()
         {
             RoleManager<IdentityRole> rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
@@ -142,7 +141,7 @@ namespace MVCAttendanceSystem.Controllers
             await rm.CreateAsync(ir);
             return Content("Admin Created");
         }
-
+        [AllowAnonymous]
         public async Task<ActionResult> CreateStudentRole()
         {
             RoleManager<IdentityRole> rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
@@ -150,7 +149,7 @@ namespace MVCAttendanceSystem.Controllers
             await rm.CreateAsync(ir);
             return Content("Student Created");
         }
-
+        [AllowAnonymous]
         public async Task<ActionResult> CreateSecurityRole()
         {
             RoleManager<IdentityRole> rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
@@ -416,6 +415,7 @@ namespace MVCAttendanceSystem.Controllers
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
